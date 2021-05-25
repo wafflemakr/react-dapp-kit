@@ -151,7 +151,7 @@ export const Web3Provider = ({ children }) => {
         setProtocol(accounts);
       });
     } catch (error) {
-      notify("error", error.message);
+      notify("error", "Could not connect to web3!");
       console.log(error.message);
     }
 
