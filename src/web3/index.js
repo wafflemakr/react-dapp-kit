@@ -36,7 +36,6 @@ export const Web3Context = createContext(initialState);
 
 export const Web3Provider = ({ children }) => {
   const [state, dispatch] = useReducer(Web3Reducer, initialState);
-  const [error, setError] = useState({ open: false });
 
   const { account, contracts } = state;
 
@@ -80,7 +79,8 @@ export const Web3Provider = ({ children }) => {
       type: "CLEAR_STATE",
       payload: initialState,
     });
-    localStorage.setItem("defaultWallet", null);
+    localStorage.setItem("WEB3_CONNECT_CACHED_PROVIDER", null);
+    history.push("/");
   };
   const toWei = (value) => web3.utils.toWei(String(value));
   const fromWei = (value) => Number(web3.utils.fromWei(String(value)));
@@ -151,6 +151,7 @@ export const Web3Provider = ({ children }) => {
         setProtocol(accounts);
       });
     } catch (error) {
+      notify("error", error.message);
       console.log(error.message);
     }
 
@@ -166,11 +167,8 @@ export const Web3Provider = ({ children }) => {
 
       return { ETH: fromWei(balanceETH), DAI: fromWei(balanceDAI) };
     } catch (error) {
-      setError({
-        open: true,
-        title: "Error",
-        content: error.message,
-      });
+      notify("error", error.message);
+      console.log(error.message);
     }
   };
 

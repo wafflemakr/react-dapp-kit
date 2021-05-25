@@ -13,7 +13,7 @@ export default function Header() {
         <Col sm="3">
           <div className="w-25">
             <Image
-              style={{ maxHeight: "100px" }}
+              style={{ maxHeight: "60px" }}
               id="logo-image"
               src="https://cdn.worldvectorlogo.com/logos/ethereum-eth.svg"
               alt="eth-logo"
